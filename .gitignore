@@ -1,3 +1,6 @@
 *.cmi
 *.cmo
 *.swp
+*.log
+*.cache
+*/test
