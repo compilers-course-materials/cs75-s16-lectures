@@ -1,0 +1,276 @@
+⤇ rlwrap ocaml
+        OCaml version 4.02.3
+
+Findlib has been successfully loaded. Additional directives:
+  #require "package";;      to load a package
+  #list;;                   to list the available packages
+  #camlp4o;;                to load camlp4 (standard syntax)
+  #camlp4r;;                to load camlp4 (revised syntax)
+  #predicates "p,q,...";;   to set these predicates
+  Topfind.reset();;         to force that packages will be reloaded
+  #thread;;                 to enable threads
+
+/usr/local/lib/ocaml/dynlink.cma: loaded
+/usr/local/lib/ocaml/camlp4: added to search path
+/usr/local/lib/ocaml/camlp4/camlp4o.cma: loaded
+/usr/local/lib/ocaml/threads: added to search path
+/usr/local/lib/ocaml/unix.cma: loaded
+/usr/local/lib/ocaml/threads/threads.cma: loaded
+/usr/local/lib/ocaml/bigarray.cma: loaded
+/Users/joe/.opam/system/lib/bin_prot: added to search path
+/Users/joe/.opam/system/lib/bin_prot/bin_prot.cma: loaded
+/Users/joe/.opam/system/lib/custom_printf: added to search path
+/Users/joe/.opam/system/lib/custom_printf/custom_printf.cma: loaded
+/Users/joe/.opam/system/lib/variantslib: added to search path
+/Users/joe/.opam/system/lib/variantslib/variantslib.cma: loaded
+/Users/joe/.opam/system/lib/sexplib: added to search path
+/Users/joe/.opam/system/lib/sexplib/sexplib.cma: loaded
+/Users/joe/.opam/system/lib/enumerate: added to search path
+/Users/joe/.opam/system/lib/fieldslib: added to search path
+/Users/joe/.opam/system/lib/fieldslib/fieldslib.cma: loaded
+/Users/joe/.opam/system/lib/pa_bench: added to search path
+/Users/joe/.opam/system/lib/pa_bench/pa_bench_lib.cma: loaded
+/Users/joe/.opam/system/lib/pa_ounit: added to search path
+/Users/joe/.opam/system/lib/pa_ounit/pa_ounit_lib.cma: loaded
+/Users/joe/.opam/system/lib/pa_test: added to search path
+/Users/joe/.opam/system/lib/pa_test/pa_test_lib.cma: loaded
+/Users/joe/.opam/system/lib/typerep_lib: added to search path
+/Users/joe/.opam/system/lib/typerep_lib/typerep_lib.cma: loaded
+/Users/joe/.opam/system/lib/core_kernel: added to search path
+/Users/joe/.opam/system/lib/core_kernel/core_kernel.cma: loaded
+/Users/joe/.opam/system/lib/sexplib_unix: added to search path
+/Users/joe/.opam/system/lib/sexplib_unix/sexplib_unix.cma: loaded
+/Users/joe/.opam/system/lib/pa_structural_sexp: added to search path
+/Users/joe/.opam/system/lib/pa_structural_sexp/pa_structural_sexp_lib.cma:
+loaded
+/Users/joe/.opam/system/lib/core: added to search path
+/Users/joe/.opam/system/lib/core/core.cma: loaded
+/Users/joe/.opam/system/lib/core/core_top.cma: loaded
+  Camlp4 Parsing version 4.02.3
+
+/Users/joe/.opam/system/lib/core/core_top.cma: loaded
+/Users/joe/.opam/system/lib/type_conv: added to search path
+/Users/joe/.opam/system/lib/type_conv/pa_type_conv.cma: loaded
+/Users/joe/.opam/system/lib/sexplib/pa_sexp_conv.cma: loaded
+/Users/joe/.opam/system/lib/fieldslib/pa_fields_conv.cma: loaded
+/Users/joe/.opam/system/lib/variantslib/pa_variants_conv.cma: loaded
+/Users/joe/.opam/system/lib/comparelib: added to search path
+/Users/joe/.opam/system/lib/comparelib/comparelib.cma: loaded
+/Users/joe/.opam/system/lib/comparelib/pa_compare.cma: loaded
+/Users/joe/.opam/system/lib/bin_prot/pa_bin_prot.cma: loaded
+/Users/joe/.opam/system/lib/custom_printf/pa_custom_printf.cma: loaded
+/Users/joe/.opam/system/lib/pa_pipebang: added to search path
+/Users/joe/.opam/system/lib/pa_pipebang/pa_pipebang.cma: loaded
+/Users/joe/.opam/system/lib/herelib: added to search path
+/Users/joe/.opam/system/lib/herelib/pa_herelib.cma: loaded
+# open Printf
+  ;;
+#
+# 55;;
+- : int = 55
+# 55 < 44;;
+- : bool = false
+# "abc" < "def";;
+- : bool = true
+# [1;2;3] < [4;5;6];;
+- : bool = true
+# [4;5;6] < [1;2;3];;
+- : bool = false
+# [4;5;6] < [1;2];;
+- : bool = false
+# [4;5;6] < [];;
+- : bool = false
+# [] < [];;
+- : bool = false
+# [6; 1] < [1; 9];;
+- : bool = false
+# [] <  [1];;
+- : bool = true
+# [1;1;1] < [2];
+  ;
+Error: Parse error: [str_item] or ";;" expected (in [top_phrase])
+# [1;1;1] < [2];;
+- : bool = true
+# [1] < [2; 2];;
+- : bool = true
+# [1;1;1] < [1;1;1;1];;
+- : bool = true
+# [] < [1];;
+- : bool = true
+# (fun x -> x - 1) < (fun y -> y);;
+Exception: (Invalid_argument "equal: functional value").
+#
+let rec negate_all (l : int list) : int list =
+  match l with
+    | [] -> []
+    | first::rest ->
+      ((-1) * first)::(negate_all rest);;
+
+val negate_all : int list -> int list = <fun>
+#   (negate_all [1;-1;3]);;
+- : int list = [-1; 1; -3]
+# let rec update_all (l : int list) (f : int -> int) : int list =match l with
+    match l with
+      | [] -> []t ->
+      | first::rest ->date_all rest);;
+        (f first)::(update_all rest);;
+Error: This expression has type (int -> int) -> int list
+       but an expression was expected of type int list
+let rec update_all (l : int list) (f : int -> int) : int list =
+  match l with
+    | [] -> []
+    | first::rest ->
+        (f first)::(update_all rest f);;
+val update_all : int list -> (int -> int) -> int list = <fun>
+# let increment_all (l : int list) =
+    update_all l 1;;
+Error: This expression has type int but an expression was expected of type
+         int -> int
+let increment (x : int): int = x + 1;;
+val increment : int -> int = <fun>
+#
+let increment_all (l : int list) =
+    update_all l increment;;
+val increment_all : int list -> int list = <fun>
+# (increment_all [1;2;3;4]);;
+- : int list = [2; 3; 4; 5]
+let increment_all2 (l : int list) =
+    update_all l (fun x -> x + 1);;
+val increment_all2 : int list -> int list = <fun>
+# (increment_all2 [1;2;3;4]);;
+- : int list = [2; 3; 4; 5]
+# let increment_all2 (l : int list) =
+    update_all l ((fun x -> x) + 1);;
+Error: This expression should not be a function, the expected type is
+int
+# let increment_all2 (l : int list) : int list =
+    update_all l (fun (x : int) : int -> (x + 1));;
+Error: Parse error: [fun_def_cont] expected (in [fun_def])
+#
+let rec update_all (l : 'a list) (f : 'a -> 'b) : 'b list =
+  match l with
+    | [] -> []
+    | first::rest ->
+        (f first)::(update_all rest f);;
+val update_all : 'a list -> ('a -> 'b) -> 'b list = <fun>
+let increment_all (l : int list) : int list =
+    update_all l increment;;
+val increment_all : int list -> int list = <fun>
+# let length_all (l : string list) : int list =
+    update_all l String.length;;
+val length_all : string list -> int list = <fun>
+# (length_all ["a";"hi";"hello"]);;
+- : int list = [1; 2; 5]
+# let length_all (l : string list) : int list =
+    List.map String.length l;;
+val length_all : string list -> int list = <fun>
+# (length_all ["a";"hi";"hello"]);;
+- : int list = [1; 2; 5]
+# ((fun x -> x + 1) 6);;
+- : int = 7
+let add_n_a (l : int list) (n : int) : int list =
+    update_all l ((fun x y -> x + y) n);;
+val add_n_a : int list -> int -> int list = <fun>
+# (add_n_a [4;5] 10);;
+- : int list = [14; 15]
+# (add_n_b [4;5] 10);;
+Error: Unbound value add_n_b
+Hint: Did you mean add_n_a?
+let add_n_b (l : int list) (n : int) : int list =
+    update_all l (fun x -> x + n)
+  ;;
+val add_n_b : int list -> int -> int list = <fun>
+# (add_n_b [4;5] 10);;
+- : int list = [14; 15]
+# flip;;
+Error: Unbound value flip
+# let flip (f : 'a -> 'b -> 'c) (x : 'a) (y : 'b) : 'c = f y x;;
+val flip : ('a -> 'a -> 'c) -> 'a -> 'a -> 'c = <fun>
+# let flip (f : 'b -> 'a -> 'c) (x : 'a) (y : 'b) : 'c = f y x;;
+val flip : ('b -> 'a -> 'c) -> 'a -> 'b -> 'c = <fun>
+# let sub x y = (x - y);;
+val sub : int -> int -> int = <fun>
+# let sub_flipped = flip sub;;
+val sub_flipped : int -> int -> int = <fun>
+# sub 10 5;;
+- : int = 5
+# sub_flipped 10 5;;
+- : int = -5
+#
+let rec length_all2 l =
+  match l with
+    | [] -> []
+    | first::rest ->
+        (String.length first)::(length_all2 rest);;
+val length_all2 : string list -> int list = <fun>
+# (length_all2 3);;
+Error: This expression has type int but an expression was expected of type
+         string list
+let rec length_all3 l =
+  match l with
+    | [] -> []
+      | first::rest -> first::(length_all3 rest);;
+val length_all3 : 'a list -> 'a list = <fun>
+let f g x = g x;;
+val f : ('a -> 'b) -> 'a -> 'b = <fun>
+#
+let rec length_all4 l =
+  match l with
+    | [] -> []
+      | first::rest -> first::(f length_all4 rest);;
+val length_all4 : 'a list -> 'a list = <fun>
+# (<);;
+- : 'a -> 'a -> bool = <fun>
+let rec length_all5 l =
+  match l with
+    | [] -> []
+    | first::rest ->
+        (first < 10)::(length_all5 rest);;
+val length_all5 : int list -> bool list = <fun>
+# let rec length_all5 l =
+    match l with
+      | [] -> []
+      | first::second::rest ->
+        (first < second)::(length_all5 rest);;
+Warning 8: this pattern-matching is not exhaustive.
+Here is an example of a value that is not matched:
+_::[]
+val length_all5 : 'a list -> bool list = <fun>
+#     | first::[] ->
+Error: Parse error: illegal begin of top_phrase
+#       [first];;
+Error: Unbound value first
+Hint: Did you mean fst?
+# let rec length_all5 l =
+    match l with
+      | [] -> []
+      | first::second::rest ->
+        (first < second)::(length_all5 rest);;
+Warning 8: this pattern-matching is not exhaustive.
+Here is an example of a value that is not matched:
+_::[]
+val length_all5 : 'a list -> bool list = <fun>
+#     | first::[] ->
+Error: Parse error: illegal begin of top_phrase
+#       [first];;
+Error: Unbound value first
+Hint: Did you mean fst?
+let rec length_all5 l =
+  match l with
+    | [] -> []
+    | first::second::rest ->
+      (first < second)::(length_all5 rest)
+    | [first] ->
+        [first];;
+val length_all5 : bool list -> bool list = <fun>
+let rec length_all5 l =
+  match l with
+    | [] -> []
+    | first::second::rest ->
+      (first < second)::(length_all5 rest)
+    | [first] -> [];;
+
+val length_all5 : 'a list -> bool list = <fun>
+#   (<);;
+- : 'a -> 'a -> bool = <fun>
+#
