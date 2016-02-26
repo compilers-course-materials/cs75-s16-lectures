@@ -1,0 +1,180 @@
+$ lldb ./output/print.run
+(lldb) target create "./output/print.run"
+Current executable set to './output/print.run' (i386).
+(lldb) b our_code_starts_here
+Breakpoint 1: where = print.run`our_code_starts_here, address = 0x00001e70
+(lldb) r
+Process 82780 launched: './output/print.run' (i386)
+Process 82780 stopped
+* thread #1: tid = 0xb9eae, 0x00001e70 print.run`our_code_starts_here, queue =
+* 'com.apple.main-thread', stop reason = breakpoint 1.1
+    frame #0: 0x00001e70 print.run`our_code_starts_here
+print.run`our_code_starts_here:
+->  0x1e70 <+0>: push   ebp
+    0x1e71 <+1>: mov    ebp, esp
+    0x1e73 <+3>: sub    esp, 0xfffffffc
+    0x1e79 <+9>: mov    eax, 0xa
+(lldb) register read ebp esp
+     ebp = 0xbffffaa8
+     esp = 0xbffffa7c
+(lldb) memory read -f x -c 10  $esp
+0xbffffa7c: 0x00001e54 0x8fe01094 0x00000000 0x00000000
+0xbffffa8c: 0xbffffad8 0x00000001 0x00000000 0x0000000f
+0xbffffa9c: 0x00000000 0x00000000
+(lldb) memory read -f x -c 10 0x00001e54
+0x00001e54: 0x08244489 0x0824448b 0xe8240489 0xfffffdac
+0x00001e64: 0x4489c931 0xc8890424 0xc35dec89 0x81e58955
+0x00001e74: 0xfffffcec 0x000ab8ff
+(lldb) memory read -f i -c 10 0x00001e54
+    0x1e54: 89 44 24 08     movl   %eax, 0x8(%esp)
+    0x1e58: 8b 44 24 08     movl   0x8(%esp), %eax
+    0x1e5c: 89 04 24        movl   %eax, (%esp)
+    0x1e5f: e8 ac fd ff ff  calll  0x1c10                    ; print at
+main.c:8
+    0x1e64: 31 c9           xorl   %ecx, %ecx
+    0x1e66: 89 44 24 04     movl   %eax, 0x4(%esp)
+    0x1e6a: 89 c8           movl   %ecx, %eax
+    0x1e6c: 89 ec           movl   %ebp, %esp
+    0x1e6e: 5d              popl   %ebp
+    0x1e6f: c3              retl
+(lldb) memory read -f i -c 10 0x00001e58
+    0x1e58: 8b 44 24 08     movl   0x8(%esp), %eax
+    0x1e5c: 89 04 24        movl   %eax, (%esp)
+    0x1e5f: e8 ac fd ff ff  calll  0x1c10                    ; print at
+main.c:8
+    0x1e64: 31 c9           xorl   %ecx, %ecx
+    0x1e66: 89 44 24 04     movl   %eax, 0x4(%esp)
+    0x1e6a: 89 c8           movl   %ecx, %eax
+    0x1e6c: 89 ec           movl   %ebp, %esp
+    0x1e6e: 5d              popl   %ebp
+    0x1e6f: c3              retl
+->  0x1e70: 55              pushl  %ebp
+(lldb) memory read -f i -c 10 0x00001e42
+    0x1e42: 14 00              adcb   $0x0, %al
+    0x1e44: 00 00              addb   %al, (%eax)
+    0x1e46: 00 89 4c 24 10 89  addb   %cl, -0x76efdbb4(%ecx)
+    0x1e4c: 44                 incl   %esp
+    0x1e4d: 24 0c              andb   $0xc, %al
+    0x1e4f: e8 1c 00 00 00     calll  0x1e70                    ;
+our_code_starts_here
+    0x1e54: 89 44 24 08        movl   %eax, 0x8(%esp)
+    0x1e58: 8b 44 24 08        movl   0x8(%esp), %eax
+    0x1e5c: 89 04 24           movl   %eax, (%esp)
+    0x1e5f: e8 ac fd ff ff     calll  0x1c10                    ; print at
+main.c:8
+(lldb) memory read -f i -c 10 0x00001e43
+    0x1e43: 00 00           addb   %al, (%eax)
+    0x1e45: 00 00           addb   %al, (%eax)
+    0x1e47: 89 4c 24 10     movl   %ecx, 0x10(%esp)
+    0x1e4b: 89 44 24 0c     movl   %eax, 0xc(%esp)
+    0x1e4f: e8 1c 00 00 00  calll  0x1e70                    ;
+our_code_starts_here
+    0x1e54: 89 44 24 08     movl   %eax, 0x8(%esp)
+    0x1e58: 8b 44 24 08     movl   0x8(%esp), %eax
+    0x1e5c: 89 04 24        movl   %eax, (%esp)
+    0x1e5f: e8 ac fd ff ff  calll  0x1c10                    ; print at
+main.c:8
+    0x1e64: 31 c9           xorl   %ecx, %ecx
+(lldb) f
+frame #0: 0x00001e70 print.run`our_code_starts_here
+print.run`our_code_starts_here:
+->  0x1e70 <+0>: push   ebp
+    0x1e71 <+1>: mov    ebp, esp
+    0x1e73 <+3>: sub    esp, 0xfffffffc
+    0x1e79 <+9>: mov    eax, 0xa
+(lldb) register read ebp esp
+     ebp = 0xbffffaa8
+     esp = 0xbffffa7c
+(lldb) si
+Process 82780 stopped
+* thread #1: tid = 0xb9eae, 0x00001e71 print.run`our_code_starts_here + 1,
+* queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x00001e71 print.run`our_code_starts_here + 1
+print.run`our_code_starts_here:
+->  0x1e71 <+1>:  mov    ebp, esp
+    0x1e73 <+3>:  sub    esp, 0xfffffffc
+    0x1e79 <+9>:  mov    eax, 0xa
+    0x1e7e <+14>: push   eax
+(lldb) register read ebp esp
+     ebp = 0xbffffaa8
+     esp = 0xbffffa78
+(lldb) memory read -f x -c 4 $esp
+0xbffffa78: 0xbffffaa8 0x00001e54 0x8fe01094 0x00000000
+(lldb) si
+Process 82780 stopped
+* thread #1: tid = 0xb9eae, 0x00001e73 print.run`our_code_starts_here + 3,
+* queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x00001e73 print.run`our_code_starts_here + 3
+print.run`our_code_starts_here:
+->  0x1e73 <+3>:  sub    esp, 0xfffffffc
+    0x1e79 <+9>:  mov    eax, 0xa
+    0x1e7e <+14>: push   eax
+    0x1e7f <+15>: call   0x1c10                    ; print at main.c:8
+(lldb) register read ebp esp
+     ebp = 0xbffffa78
+     esp = 0xbffffa78
+(lldb) si
+Process 82780 stopped
+* thread #1: tid = 0xb9eae, 0x00001e79 print.run`our_code_starts_here + 9,
+* queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x00001e79 print.run`our_code_starts_here + 9
+print.run`our_code_starts_here:
+->  0x1e79 <+9>:  mov    eax, 0xa
+    0x1e7e <+14>: push   eax
+    0x1e7f <+15>: call   0x1c10                    ; print at main.c:8
+    0x1e84 <+20>: pop    eax
+(lldb) register read ebp esp
+     ebp = 0xbffffa78
+     esp = 0xbffffa7c
+(lldb) si
+Process 82780 stopped
+* thread #1: tid = 0xb9eae, 0x00001e7e print.run`our_code_starts_here + 14,
+* queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x00001e7e print.run`our_code_starts_here + 14
+print.run`our_code_starts_here:
+->  0x1e7e <+14>: push   eax
+    0x1e7f <+15>: call   0x1c10                    ; print at main.c:8
+    0x1e84 <+20>: pop    eax
+    0x1e85 <+21>: mov    dword ptr [ebp - 0x4], eax
+(lldb) memory read -f i -c 20 $eip
+->  0x1e7e: 50                 pushl  %eax
+    0x1e7f: e8 8c fd ff ff     calll  0x1c10                    ; print at
+main.c:8
+    0x1e84: 58                 popl   %eax
+    0x1e85: 89 45 fc           movl   %eax, -0x4(%ebp)
+    0x1e88: 8b 45 fc           movl   -0x4(%ebp), %eax
+    0x1e8b: 89 ec              movl   %ebp, %esp
+    0x1e8d: 5d                 popl   %ebp
+    0x1e8e: c3                 retl
+    0x1e8f: 68 03 00 00 00     pushl  $0x3
+    0x1e94: e8 57 fe ff ff     calll  0x1cf0                    ; error at
+main.c:24
+    0x1e99: 68 01 00 00 00     pushl  $0x1
+    0x1e9e: e8 4d fe ff ff     calll  0x1cf0                    ; error at
+main.c:24
+    0x1ea3: 68 02 00 00 00     pushl  $0x2
+    0x1ea8: e8 43 fe ff ff     calll  0x1cf0                    ; error at
+main.c:24
+    0x1ead: 90                 nop
+    0x1eae: ff 25 0c 20 00 00  jmpl   *0x200c
+    0x1eb4: ff 25 10 20 00 00  jmpl   *0x2010
+    0x1eba: ff 25 14 20 00 00  jmpl   *0x2014
+    0x1ec0: 68 04 20 00 00     pushl  $0x2004
+    0x1ec5: ff 25 00 20 00 00  jmpl   *0x2000
+(lldb) b         movl   %ebp, %esp
+Breakpoint 2: no locations (pending).
+WARNING:  Unable to resolve breakpoint to any actual locations.
+(lldb) b 0x1e7f
+Breakpoint 3: where = print.run`our_code_starts_here + 15, address =
+0x00001e7f
+(lldb) c
+Process 82780 resuming
+Process 82780 stopped
+* thread #1: tid = 0xb9eae, 0x00001e7f print.run`our_code_starts_here + 15,
+* queue = 'com.apple.main-thread', stop reason = breakpoint 3.1
+    frame #0: 0x00001e7f print.run`our_code_starts_here + 15
+print.run`our_code_starts_here:
+->  0x1e7f <+15>: call   0x1c10                    ; print at main.c:8
+    0x1e84 <+20>: pop    eax
+    0x1e85 <+21>: mov    dword ptr [ebp - 0x4], eax
+    0x1e88 <+24>: mov    eax, dword ptr [ebp - 0x4]
