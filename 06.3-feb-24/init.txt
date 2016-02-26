@@ -1,0 +1,4 @@
+You can put this line in a file in your home directory called ~/.lldbinit, and
+it will print with intel syntax by default:
+
+settings set target.x86-disassembly-flavor intel
